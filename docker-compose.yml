@@ -1,0 +1,40 @@
+version: '3'
+services:
+  app:
+    container_name: ${PROJECT_NAME}_app
+    restart: always
+    build: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - '80:3000'
+    links:
+      - mongo
+    # networks:
+    #   - backend
+  mongo:
+    container_name: ${PROJECT_NAME}_mongo
+    image: mongo
+    restart: always
+    # volumes:
+      # - ./mongodb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_MONGO_PASS}
+    ports:
+      - '27017:27017'
+    # networks:
+    #   - backend
+    # networks:
+    #   static-network:
+    #     ipv4_address: 172.20.128.2
+
+# networks:
+#   backend:
+#     name: custom_backend
+    # driver: custom-driver-1
+
+# Conect to Compass: mongodb://127.0.0.1:27017
+# Conect to Compass: mongodb://root:test@127.0.0.1:27017
+# Conect to Compass: mongodb://root:test@127.0.0.1:27017
+

@@ -1,12 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MI SUPER API</title>
 </head>
+
 <body>
-    <h1>Documentación de la Api de Hernán</h1>
+    <h1>Google sign-in</h1>
+    <div>
+        <div id="g_id_onload" data-client_id="55933268346-5urnhpmgstns36qp98occci0kkv4adaj.apps.googleusercontent.com"
+            data-auto_prompt="false" data-callback="handleCredentialResponse">
+        </div>
+        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
+            data-shape="rectangular" data-logo_alignment="left">
+        </div>
+    </div>
+    <div>
+        <button id="signOut">Sign Out</button>
+    </div>
+    <script>
+
+
+        async function handleCredentialResponse(response) {
+            try {
+                const res = await fetch('http://localhost/api/auth/google', {
+                    method: 'POST',
+                    body: JSON.stringify({ 'id_token': response.credential }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                const json = await res.json()
+                localStorage.setItem('email', json.usuario.correo)
+                location.reload();
+
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
+
+        const button = document.getElementById('signOut')
+        button.onclick = (evt) => {
+            google.accounts.id.disableAutoSelect()
+            google.accounts.id.revoke(localStorage.getItem('email'), done => {
+                localStorage.clear();
+                location.reload();
+            })
+        }
+
+    </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
+
 </html>
