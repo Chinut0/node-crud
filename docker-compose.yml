@@ -12,6 +12,11 @@ services:
       - mongo
     # networks:
     #   - backend
+    # networks:
+    #   - backend
+    # networks:
+    #   static-network:
+    #     ipv4_address: 172.20.128.2
   mongo:
     container_name: ${PROJECT_NAME}_mongo
     image: mongo
@@ -23,12 +28,6 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${DB_MONGO_PASS}
     ports:
       - '27017:27017'
-    # networks:
-    #   - backend
-    # networks:
-    #   static-network:
-    #     ipv4_address: 172.20.128.2
-
 # networks:
 #   backend:
 #     name: custom_backend

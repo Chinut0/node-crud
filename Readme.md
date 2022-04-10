@@ -7,3 +7,8 @@ El proyecto incluye:
 - Login con JWT.
 
 - Google identity: https://developers.google.com/identity/gsi/web/guides/overview
+
+- Seeder for user, rol. Execute command ./run_seeder.sh in console outside container.
+
+- CRUD de products and category.
+- Route to search /api/buscar/:cotroller/:term

@@ -16,5 +16,12 @@ COPY . .
 # Expose the port that the app is runnig
 EXPOSE 3000
 
+# Run Seeder
 # Start app dev
 CMD ["npm", "run", "dev"]
+
+# CMD ["npm", "run", "seed"] && ["npm", "run", "dev"]
+
+# ADD run_local.sh /
+# RUN chmod +x /run_local.sh
+# CMD ["run_local.sh"]
