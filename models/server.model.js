@@ -1,7 +1,7 @@
 const express = require('express');
 var cors = require('cors');
 const { dbConnection } = require('../database/config');
-
+const fileUpload = require('express-fileupload')
 
 class Server {
 
@@ -9,11 +9,12 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
         this.paths = {
-            auth:           '/api/auth',
-            users:          '/api/users',
-            categorias:     '/api/categorias',
-            productos:      '/api/productos',
-            buscar:         '/api/buscar'
+            auth: '/api/auth',
+            buscar: '/api/buscar',
+            categorias: '/api/categorias',
+            productos: '/api/productos',
+            upload: '/api/uploads',
+            users: '/api/users',
         }
 
         //Connect to DB
@@ -42,6 +43,12 @@ class Server {
         //Directorio Publico
         this.app.use(express.static('public'));
 
+        //Carga de archivos.
+        this.app.use(fileUpload({
+            useTempFiles: true,
+            tempFileDir: './temp/',
+            createParentPath: true
+        }))
     }
 
     routes() {
@@ -50,6 +57,7 @@ class Server {
         this.app.use(this.paths.categorias, require('../routes/categorias.route'))
         this.app.use(this.paths.productos, require('../routes/productos.route'))
         this.app.use(this.paths.buscar, require('../routes/buscar.route'))
+        this.app.use(this.paths.upload, require('../routes/uploads.route'))
 
         // this.app.get('/asdf', (req, res) => {
         //     res.send('Hello World')

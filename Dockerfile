@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose the port that the app is runnig
-EXPOSE 3000
+# EXPOSE 3000
 
 # Run Seeder
 # Start app dev

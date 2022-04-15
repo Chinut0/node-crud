@@ -12,3 +12,15 @@ El proyecto incluye:
 
 - CRUD de products and category.
 - Route to search /api/buscar/:cotroller/:term
+
+- File system for img of products and users
+
+//Para trabajar en en dev.
+Levantar el contenedor corriendo el run dev que usa NODEMON.
+Docker-compose -> Puerto '80:${PORT}' para localhost.
+Usar docker logs -f CONTAINER para ver los logs en tiempo real
+Correr seeders.
+
+//Pendientes
+Meter los directorios de la app en src para separarlo de las config, variables de entorno, etc.
+Averiguar si es mejor agregar o no los .model.js entre otros para identificar mas rapido el arhcivo.

@@ -119,12 +119,6 @@ const buscar = (req = request, res = response) => {
             })
             break;
     }
-
-
-    // console.log(collection, term);
-    // res.json({
-    //     msg: 'buscar'
-    // })
 }
 
 
